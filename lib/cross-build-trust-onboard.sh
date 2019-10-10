@@ -15,7 +15,7 @@ cd /debs
 git clone --recursive ${git_source} -b ${git_branch} breakout-tob
 cd breakout-tob
 mkdir cmake; cd cmake
-cmake $cmake_flags ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr $cmake_flags ..
 make -j4
 cpack
 mv *.deb ../..
