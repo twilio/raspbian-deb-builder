@@ -9,17 +9,16 @@ set -e
 
 git_source=$1
 git_branch=$2
-package_name=$3
-version=$4
+version=$3
 #maybe dist?
 
 license=mit
 author_email=agerasimov@twilio.com
 
-full_package_name=${package_name}-${version}
+full_package_name=azure-iot-sdk-c-twilio-${version}
 
-if [ "$#" != "4" ]; then
-	echo "Usage: cross-build-deb-azure.sh git_repo_url git_branch package_name version"
+if [ "$#" != "3" ]; then
+	echo "Usage: cross-build-deb-azure.sh git_repo_url git_branch version"
 	exit 1
 fi
 
