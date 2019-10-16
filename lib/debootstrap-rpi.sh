@@ -5,7 +5,7 @@ set -e
 rootfs=$1
 dist=$2
 mirror="http://archive.raspbian.org/raspbian"
-include="fakeroot,build-essential,ca-certificates,git,cmake,dh-make,uuid-dev,libssl-dev,libcurl4-openssl-dev,curl"
+include="fakeroot,build-essential,ca-certificates,git,cmake,dh-make,uuid-dev,libssl-dev,libcurl4-openssl-dev,curl,clang"
 
 
 if [ "$rootfs" == "" ]; then
