@@ -37,6 +37,14 @@ dh_make -y -l -c ${license} -e ${author_email} -f ../${full_package_name}.tar.gz
 dh_make -y -l -c ${license} -e ${author_email} -f ../${full_package_name}.tar.gz || true
 
 cp -r ./build_all/packaging/linux/debian ./
+cat >./debian/changelog <<EOF
+azure-iot-sdk-c-twilio (${version}) buster; urgency=low
+
+  * See tag ${git_branch} on https://github.com/twilio/Breakout_Trust_Onboard_SDK for source
+
+ -- Anton Gerasimov <agerasimov@twilio.com> $(date -R)
+EOF
+
 dpkg-buildpackage -us -uc || fail "Building debian package failed"
 
 # do we need a source package?
