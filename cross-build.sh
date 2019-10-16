@@ -19,7 +19,7 @@ if [ "$#" -lt "2" ]; then
 fi
 
 ROOTDIR=$(mktemp -d)
-./lib/debootstrap-rpi.sh ${ROOTDIR} $dist
+./lib/debootstrap-rpi.sh ${ROOTDIR} $dist >&2
 
 for prod in $products; do
 	prodname=$(echo "$prod" | cut -d':' -f1)
@@ -28,11 +28,11 @@ for prod in $products; do
 	case $prodname in
 		"azure-iot-sdk-c")
 			cp lib/cross-build-deb-azure.sh ${ROOTDIR}
-			chroot ${ROOTDIR} /cross-build-deb-azure.sh https://github.com/twilio/azure-iot-sdk-c ${prodbranch} ${prodver}
+			chroot ${ROOTDIR} /cross-build-deb-azure.sh https://github.com/twilio/azure-iot-sdk-c ${prodbranch} ${prodver} >&2
 			;;
 		"breakout-tob-sdk")
 			cp lib/cross-build-trust-onboard.sh ${ROOTDIR}
-			chroot ${ROOTDIR} /cross-build-trust-onboard.sh https://github.com/twilio/Breakout_Trust_Onboard_SDK ${prodbranch} ${prodver} -DOPENSSL_SUPPORT=ON -DBUILD_SHARED=ON
+			chroot ${ROOTDIR} /cross-build-trust-onboard.sh https://github.com/twilio/Breakout_Trust_Onboard_SDK ${prodbranch} ${prodver} -DOPENSSL_SUPPORT=ON -DBUILD_SHARED=ON >&2
 			;;
 		*)
 			echo "Unknown product, skipping" >&2
