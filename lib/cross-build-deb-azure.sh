@@ -10,15 +10,15 @@ set -e
 git_source=$1
 git_branch=$2
 version=$3
-#maybe dist?
+dist=$4
 
 license=mit
 author_email=agerasimov@twilio.com
 
 full_package_name=azure-iot-sdk-c-twilio-${version}
 
-if [ "$#" != "3" ]; then
-	echo "Usage: cross-build-deb-azure.sh git_repo_url git_branch version"
+if [ "$#" != "4" ]; then
+	echo "Usage: cross-build-deb-azure.sh git_repo_url git_branch version dist"
 	exit 1
 fi
 
@@ -38,7 +38,7 @@ dh_make -y -l -c ${license} -e ${author_email} -f ../${full_package_name}.tar.gz
 
 cp -r ./build_all/packaging/linux/debian ./
 cat >./debian/changelog <<EOF
-azure-iot-sdk-c-twilio (${version}) buster; urgency=low
+azure-iot-sdk-c-twilio (${version}.1${dist}) ${dist}; urgency=low
 
   * See tag ${git_branch} on https://github.com/twilio/Breakout_Trust_Onboard_SDK for source
 
