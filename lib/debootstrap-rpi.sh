@@ -5,8 +5,7 @@ set -e
 rootfs=$1
 dist=$2
 mirror="http://archive.raspbian.org/raspbian"
-include="fakeroot,build-essential,ca-certificates,git,cmake,dh-make,uuid-dev,libssl-dev,libcurl4-openssl-dev,curl,clang"
-
+include="fakeroot,build-essential,ca-certificates,git,cmake,dh-make,uuid-dev,libssl-dev,libcurl4-openssl-dev,curl,clang,dirmngr"
 
 if [ "$rootfs" == "" ]; then
 	rootfs=$(realpath ./deboootstrap-rootfs)
@@ -21,7 +20,7 @@ if [ $EUID -ne 0 ]; then
 	exit 1
 fi
 
-aptsources="deb http://archive.raspbian.org/raspbian ${dist} main contrib non-free\ndeb-src http://archive.raspbian.org/raspbian ${dist} main contrib non-free"
+aptsources="deb http://archive.raspbian.org/raspbian ${dist} main contrib non-free\ndeb-src http://archive.raspbian.org/raspbian ${dist} main contrib non-free\ndeb http://twilio.bintray.com/wireless ${dist} main"
 
 to_install="debootstrap qemu-user-static"
 
@@ -36,4 +35,5 @@ cp /usr/bin/qemu-arm-static $rootfs/usr/bin
 chroot $rootfs /debootstrap/debootstrap --second-stage
 echo -e $aptsources > $rootfs/etc/apt/sources.list
 
+chroot $rootfs apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
 chroot $rootfs apt update
