@@ -32,7 +32,7 @@ for prod in $products; do
 			;;
 		"breakout-tob-sdk")
 			cp lib/cross-build-trust-onboard.sh ${ROOTDIR}
-			chroot ${ROOTDIR} /cross-build-trust-onboard.sh https://github.com/twilio/Breakout_Trust_Onboard_SDK ${prodbranch} ${prodver} ${dist} -DOPENSSL_SUPPORT=ON -DBUILD_SHARED=ON >&2
+			chroot ${ROOTDIR} /cross-build-trust-onboard.sh https://github.com/twilio/Breakout_Trust_Onboard_SDK ${prodbranch} ${prodver} ${dist} -DOPENSSL_SUPPORT=ON -DBUILD_AZURE=ON >&2
 			;;
 		*)
 			echo "Unknown product, skipping" >&2

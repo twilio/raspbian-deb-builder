@@ -9,7 +9,7 @@ dist=$4
 # the rest are cmake flags
 cmake_flags=${@:5}
 
-echo "CMAKE FLAGS are ${cmake_flags}"
+apt install azure-iot-sdk-c-twilio nlohmann-json-dev
 
 mkdir -p /debs
 cd /debs
