@@ -5,7 +5,13 @@ set -e
 rootfs=$1
 dist=$2
 mirror="http://archive.raspbian.org/raspbian"
-include="fakeroot,build-essential,ca-certificates,git,cmake,dh-make,uuid-dev,libssl-dev,libcurl4-openssl-dev,curl,clang,dirmngr"
+include="fakeroot,build-essential,ca-certificates,git,cmake,dh-make,uuid-dev,libcurl4-openssl-dev,curl,clang,dirmngr"
+
+if [ "$dist" == "stretch" ]; then
+	include="${include},libssl1.0-dev"
+else
+	include="${include},libssl-dev"
+fi
 
 if [ "$rootfs" == "" ]; then
 	rootfs=$(realpath ./deboootstrap-rootfs)
