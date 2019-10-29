@@ -46,7 +46,7 @@ azure-iot-sdk-c-twilio (${version}.1${dist}) ${dist}; urgency=low
 EOF
 
 if [ "$dist" == "stretch" ]; then
-	sed -i -e 's/libssl-dev/libssl1.0-dev' ./debian/control
+	sed -i -e 's/libssl-dev/libssl1.0-dev/g' ./debian/control
 fi
 
 dpkg-buildpackage -us -uc || fail "Building debian package failed"
